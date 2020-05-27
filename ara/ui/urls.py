@@ -12,4 +12,5 @@ urlpatterns = [
     path("file/<int:pk>.html", views.File.as_view(), name="file"),
     path("host/<int:pk>.html", views.Host.as_view(), name="host"),
     path("record/<int:pk>.html", views.Record.as_view(), name="record"),
+    path("report/<int:pk>.html", views.Report.as_view(), name="reports"),
 ]

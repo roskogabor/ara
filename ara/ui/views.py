@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from ara.api import filters, models, serializers
 from ara.ui import forms
 from ara.ui.pagination import LimitOffsetPaginationWithLinks
+from ara.ui import reportmaker
 
 
 class Index(generics.ListAPIView):
@@ -133,3 +134,17 @@ class Record(generics.RetrieveAPIView):
         record = self.get_object()
         serializer = serializers.DetailedRecordSerializer(record)
         return Response({"record": serializer.data})
+
+class Report(generics.RetrieveAPIView):
+    """
+    Returns a page for a detailed view of a report
+    """
+
+    queryset = models.Report.objects.all()
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "report.html"
+
+    def get(self, request, *args, **kwargs):
+        report = self.get_object()
+        serializer = serializers.DetailedReportSerializer(record)
+        return Response({"report": serializer.data})

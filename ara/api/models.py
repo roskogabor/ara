@@ -100,6 +100,30 @@ class Playbook(Duration):
         return "<Playbook %s>" % self.id
 
 
+class Report(Base):
+    """
+    Contents of a uniquely stored and compressed file.
+    Running the same playbook twice will yield two playbook files but just
+    one file contents.
+    """
+
+    class Meta:
+        db_table = "reports"
+
+    #pc_name = models.CharField(max_length=40, unique=True)
+    #updates_required = models.IntegerField(default=0)
+    #updates_installed = models.IntegerField(default=0)
+    #total_missing = models.IntegerField(default=0)
+    #critical_missing = models.IntegerField(default=0)
+    #current_compliance = models.IntegerField(default=0)
+    #os = models.Charfield(max_length=40, unique=False)
+    #Comments = models.CharField(max_length=255)
+    #contents = models.BinaryField(max_length=(2 ** 32) - 1)
+
+    def __str__(self):
+        return "<Report %s:%s>" % (self.id)
+
+
 class FileContent(Base):
     """
     Contents of a uniquely stored and compressed file.

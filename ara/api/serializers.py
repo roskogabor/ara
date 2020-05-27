@@ -129,6 +129,12 @@ class SimpleRecordSerializer(serializers.ModelSerializer):
         exclude = ("value", "created", "updated")
 
 
+class SimpleReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Report
+        exclude = ("value", "created", "updated")
+
+
 #######
 # Nested serializers returns optimized data within the context of another object.
 # For example: when retrieving a playbook, we'll already have the playbook id
@@ -172,6 +178,12 @@ class NestedPlaybookTaskSerializer(serializers.ModelSerializer):
 
 
 class NestedPlaybookRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Record
+        exclude = ("playbook", "value", "created", "updated")
+
+
+class NestedPlaybookReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Record
         exclude = ("playbook", "value", "created", "updated")
@@ -290,6 +302,15 @@ class DetailedRecordSerializer(serializers.ModelSerializer):
     value = ara_fields.CompressedObjectField(read_only=True)
 
 
+class DetailedReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Report
+        fields = "__all__"
+
+    playbook = SimplePlaybookSerializer(read_only=True)
+    value = ara_fields.CompressedObjectField(read_only=True)
+
+
 #######
 # List serializers returns lightweight fields about objects.
 # Relationships are represented by numerical IDs.
@@ -358,6 +379,14 @@ class ListFileSerializer(FileSha1Serializer):
 class ListRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Record
+        exclude = ("value", "created", "updated")
+
+    playbook = serializers.PrimaryKeyRelatedField(read_only=True)
+
+
+class ListReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Report
         exclude = ("value", "created", "updated")
 
     playbook = serializers.PrimaryKeyRelatedField(read_only=True)

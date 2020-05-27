@@ -35,10 +35,10 @@
                             <a href="../" class="pf-c-nav__link">Playbooks</a>
                             {% endif %}
                         </li>
-                        {% include "partials/api_link.html" %}
                         <li class="pf-c-nav__item">
-                            <a href="https://ara.readthedocs.io" class="pf-c-nav__link" target="_blank">Docs</a>
+                            <a href="{% url 'reports' pk=playbook.id %}" class="pf-c-nav__link" target="_blank">Reports</a>
                         </li>
+                        {% include "partials/api_link.html" %}
                     </ul>
                 </nav>
             </div>
