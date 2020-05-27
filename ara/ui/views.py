@@ -145,6 +145,6 @@ class Report(generics.RetrieveAPIView):
     template_name = "report.html"
 
     def get(self, request, *args, **kwargs):
-        report = self.get_object()
-        serializer = serializers.DetailedReportSerializer(record)
-        return Response({"report": serializer.data})
+        #report = self.get_object()
+        #serializer = serializers.DetailedReportSerializer(record)
+        return Response({"report": {"host":"hetyetye", "patched": 2, "missing": 0}})
